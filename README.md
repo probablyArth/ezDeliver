@@ -1,8 +1,7 @@
 
 ## ezDeliver
 Truck system for delivery for vegetables/ fruits farmers to customers.
-## ezDeliver
-Truck system for delivery for vegetables/ fruits farmers to customers.
+
 ## Documentation
 
 - User Interface (UI)
