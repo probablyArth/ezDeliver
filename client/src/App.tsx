@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Container maxWidth="sm">
-        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
+        fuck
       </Container>
     </div>
   )
