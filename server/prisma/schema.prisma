@@ -10,7 +10,6 @@ datasource db {
 model User {
   id String @default(uuid()) @id
   phone String @unique
-  password String
   username String
 }
 
@@ -44,4 +43,9 @@ model Vehicle {
   weightLimit Int
   pricePerKg Int
   delieveries Delievery[]
+}
+
+model Token {
+  id String @default(uuid()) @id
+  token String @db.String(600)
 }
