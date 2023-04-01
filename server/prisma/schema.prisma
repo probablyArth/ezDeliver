@@ -12,6 +12,7 @@ model User {
   phone       String      @unique
   username    String
   delieveries Delievery[]
+  tokens Token[]
 }
 
 model Delievery {
@@ -22,7 +23,7 @@ model Delievery {
   vehicleId   String?
   vehicle     Vehicle?        @relation(fields: [vehicleId], references: [id])
   sellerId    String
-  seller      User            @relation(fields: [sellerId], references: [id])
+  seller      User            @relation(fields: [sellerId], references: [id], onDelete: Cascade)
   items       Item[]
   status      DelieveryStatus @default(BOOKED)
 }
@@ -37,7 +38,7 @@ model Item {
   name        String
   weight Int
   delieveryId String
-  delievery   Delievery @relation(fields: [delieveryId], references: [id])
+  delievery   Delievery @relation(fields: [delieveryId], references: [id], onDelete: Cascade)
 }
 
 model Vehicle {
@@ -51,4 +52,6 @@ model Vehicle {
 model Token {
   id    String @id @default(uuid())
   token String @db.String(600)
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

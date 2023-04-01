@@ -5,6 +5,8 @@ import cors from "cors";
 import { config } from "dotenv";
 import morgan from "morgan";
 import { PrismaClient } from "@prisma/client";
+import ApiRouter from "./router";
+import { sign } from "jsonwebtoken";
 
 export const prisma = new PrismaClient();
 
@@ -110,6 +112,9 @@ app.use(express.json());
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
+
+app.use("/api", ApiRouter);
+
 app.get("/", async (req, res) => {
   return res.json({ message: "hi" });
 });
