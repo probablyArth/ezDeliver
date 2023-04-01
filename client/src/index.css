@@ -1,5 +1,7 @@
 body{
-  background-image: url(client/src/assets/images/farm.jpeg);
+  background-image: url('./assets/images/hex-transformed.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* :root {
