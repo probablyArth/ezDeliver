@@ -35,6 +35,7 @@ const CreateOrderForm = () => {
           }}
           noValidate
           autoComplete="off"
+          style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}
         >
           <div>
             <TextField
@@ -69,7 +70,7 @@ const CreateOrderForm = () => {
             
           </div>
 
-          <div>
+          <div style={{  width: '100%'}}>
           <TextField
             id="outlined-select-currency"
             select
@@ -84,9 +85,10 @@ const CreateOrderForm = () => {
                 </MenuItem>
             ))}
             </TextField>
+
           </div>
 
-      <div>
+      <div style={{  width: '100%'}}>
         <Button sx={{ m: 1 }} size="large" variant="contained">
           Submit
         </Button>
