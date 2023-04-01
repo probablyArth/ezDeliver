@@ -1,7 +1,7 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      MONGO_URI: string;
+      COCKROACH_CONNECTION_STRING: string;
       PORT: string;
     }
   }

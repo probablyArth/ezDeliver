@@ -4,7 +4,9 @@ import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import morgan from "morgan";
-import { connect } from "mongoose";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 config({ path: "./.env" });
 
@@ -16,21 +18,10 @@ app.use(express.json());
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
-
 app.get("/", async (req, res) => {
-  return res.json({ message: "Hi" });
+  return res.json({ message: "hi" });
 });
 
-connect(process.env.MONGO_URI)
-  .catch((err) => {
-    console.error("An error occurred while connecting to MONGODB");
-    console.log(err.message);
-    process.exit(1);
-  })
-  .then((conn) => {
-    console.log("Connected to MongoDB:", conn.connection.db.namespace);
-
-    app.listen(PORT, () => {
-      console.log(`Server started at ${PORT}`);
-    });
-  });
+app.listen(PORT, () => {
+  console.log(`Server listening at ${PORT}`);
+});
