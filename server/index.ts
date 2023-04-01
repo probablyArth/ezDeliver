@@ -6,7 +6,6 @@ import { config } from "dotenv";
 import morgan from "morgan";
 import { PrismaClient } from "@prisma/client";
 import ApiRouter from "./router";
-import { sign } from "jsonwebtoken";
 
 export const prisma = new PrismaClient();
 
