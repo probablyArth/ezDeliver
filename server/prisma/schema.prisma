@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Seller {
+  id String @default(uuid()) @id
+  phone String @unique
+  password String
+  username String
+  items Item[]
+}
+
+model Item {
+  id String @default(uuid()) @id
+  sellerId String
+  seller Seller @relation(fields: [sellerId], references: [id])
+  name String
+  quantity Int
+  weightPerKg Int
+}
+
+model Transporter {
+  id String @default(uuid()) @id
+  phone String @unique
+  password String
+  username String
+  vehicles Vehicle[]
+}
+
+model Vehicle {
+  id String @default(uuid()) @id
+  transporterId String
+  transporter Transporter @relation(fields: [transporterId], references: [id])
+  name String
+  weightLimit Int
+  pricePerKg Int
+  //TODO: find a way to add price wrt both weight and distance
+}
