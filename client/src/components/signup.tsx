@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import Checkbox from "@mui/material/Checkbox";  
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import backgroundImg from 'C:\Users\vaibhav\desktop\ezdeliver\client\src\assets\farm.jpeg';
+
 
 function Copyright(props: any) {
   return (
@@ -50,7 +52,7 @@ export default function signup() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 2,
+            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -66,14 +68,20 @@ export default function signup() {
             }}
           >
            
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" textAlign="center">
               Create A New Account
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              sx={{ mt: 5,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                // backgroundImage: `url(${backgroundImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center", }}
             >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -117,7 +125,7 @@ export default function signup() {
                 </Grid>
                
                 <Grid container justifyContent="flex-end">
-                <Grid  xs={12} sm={4} item>
+                <Grid  xs={12} sm={3} item>
                   <Link href="#" variant="body2">
                   Resend OTP
                   </Link>
@@ -125,7 +133,9 @@ export default function signup() {
               </Grid>
 
               
-              </Grid>
+              </Grid >
+              <Grid display="flex" justifyContent="center">
+
               <Button
                 type="submit"
                 variant="contained"
@@ -136,14 +146,16 @@ export default function signup() {
                   "&:hover": {
                     backgroundColor: "darkGreen",
                   },
+                  alignItems: "center"
                 }}
-              >
+                >
                 Send OTP
               </Button>
+                </Grid>
 
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/login" variant="body2">
                     Already have an account? Log in
                   </Link>
                 </Grid>
