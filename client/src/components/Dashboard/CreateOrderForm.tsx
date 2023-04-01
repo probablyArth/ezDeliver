@@ -54,27 +54,33 @@ const CreateOrderForm = () => {
             />
           </div>
           <div>
+          
+          <TextField
+            id="outlined-select-currency"
+            label="Item Name"
+            defaultValue=""
+            helperText=""
+            / >
+
+            <TextField
+            id="outlined-select-currency"
+            label="Item Quantity (in kg)"
+            defaultValue=""
+            helperText=""
+            / >
+            
+          </div>
+
+          <div>
           <TextField
             id="outlined-select-currency"
             select
             label="Select Vehical"
             defaultValue="EUR"
             helperText=""
+            fullWidth={true}
             >
             {vehicals.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                {option.label}
-                </MenuItem>
-            ))}
-            </TextField>
-            <TextField
-            id="outlined-select-currency"
-            select
-            label="Select Items"
-            defaultValue="EUR"
-            helperText=""
-            >
-            {items.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                 {option.label}
                 </MenuItem>
