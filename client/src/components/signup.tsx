@@ -51,7 +51,7 @@ export default function signup() {
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
-          sx={{
+        sx={{
             marginTop: 6,
             display: "flex",
             flexDirection: "column",
@@ -141,7 +141,7 @@ export default function signup() {
               </Grid >
               <Grid display="flex" justifyContent="center">
 
-              <Button
+            <Button
                 type="submit"
                 variant="contained"
                 sx={{
