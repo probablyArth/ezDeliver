@@ -1,3 +1,4 @@
+// import "../styles/login.css"
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,6 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import backgroundImg from "../assets/images/farm.jpeg";
 
 function Copyright(props: any) {
   return (
@@ -49,11 +51,21 @@ export default function login() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit}
           sx={{
-            marginTop: 8,
+            mt: 6,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            // backgroundImage: `url(${backgroundImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            border: "1px solid rgba(0, 0, 0, 0.2)",
+            borderRadius: 2,
+            
+            //  opacity:'0.4'
           }}
         >
           <Box
@@ -61,11 +73,13 @@ export default function login() {
               width: "100%",
               p: 3,
               mt: 0,
-              border: "1px solid #ccc",
-              borderRadius: 4,
+              border: "2px solid #ccc",
+              borderRadius: 2,
+              // backgroundColor:"blue"
+              // opacity:
+              
             }}
           >
-           
             <Typography component="h1" variant="h5" textAlign="center">
               Login
             </Typography>
@@ -75,8 +89,8 @@ export default function login() {
               onSubmit={handleSubmit}
               sx={{ mt: 5 }}
             >
-              <Grid container spacing={2}>
-              {/*   <Grid item xs={12} sm={6}>
+              <Grid container spacing={2} >
+                {/*   <Grid item xs={12} sm={6}>
                   <TextField
                     autoComplete="given-name"
                     name="firstName"
@@ -115,45 +129,42 @@ export default function login() {
                     id="otp"
                   />
                 </Grid>
-               
+
                 <Grid container justifyContent="flex-end">
-                <Grid  xs={12} sm={4} item>
-                  <Link href="#" variant="body2">
-                  {/* Login */}
-                  </Link>
+                  <Grid xs={12} sm={4} item>
+                    <Link href="#" variant="body2">
+                      {/* Login */}
+                    </Link>
+                  </Grid>
                 </Grid>
               </Grid>
-
-              
-              </Grid>
               <Grid display="flex" justifyContent="center">
-
-<Button
-  type="submit"
-  variant="contained"
-  sx={{
-    mt: 6,
-    mb: 2,
-    backgroundColor: "",
-    "&:hover": {
-      backgroundColor: "darkGreen",
-    },
-    alignItems: "center"
-  }}
-  >
-  Login
-</Button>
-  </Grid>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    mt: 6,
+                    mb: 2,
+                    backgroundColor: "",
+                    // "&:hover": {
+                    //   backgroundColor: "",
+                    // },
+                    alignItems: "center",
+                  }}
+                >
+                  Login
+                </Button>
+              </Grid>
 
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
-                  </Link>
+                  <Link href="#" variant="body2"></Link>
                 </Grid>
               </Grid>
             </Box>
           </Box>
         </Box>
+
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>

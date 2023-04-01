@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import backgroundImg from 'C:\Users\vaibhav\desktop\ezdeliver\client\src\assets\farm.jpeg';
+import backgroundImg from 'client/src/assets/images/farm.jpeg';
 
 
 function Copyright(props: any) {
@@ -48,14 +48,19 @@ export default function signup() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
-          sx={{
-            marginTop: 8,
+        sx={{
+            marginTop: 6,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            border: "1px solid rgba(0, 0, 0, 0.2)",
+            borderRadius: 2,
+            
           }}
         >
           <Box
@@ -63,8 +68,8 @@ export default function signup() {
               width: "100%",
               p: 3,
               mt: 0,
-              border: "1px solid #ccc",
-              borderRadius: 4,
+              border: "2px solid #ccc",
+              borderRadius: 2,
             }}
           >
            
@@ -136,16 +141,16 @@ export default function signup() {
               </Grid >
               <Grid display="flex" justifyContent="center">
 
-              <Button
+            <Button
                 type="submit"
                 variant="contained"
                 sx={{
                   mt: 6,
                   mb: 2,
                   backgroundColor: "",
-                  "&:hover": {
-                    backgroundColor: "darkGreen",
-                  },
+                  // "&:hover": {
+                  //   backgroundColor: "darkGreen",
+                  // },
                   alignItems: "center"
                 }}
                 >
