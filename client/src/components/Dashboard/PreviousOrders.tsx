@@ -1,11 +1,10 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 function createData(
   from: string,
@@ -13,19 +12,68 @@ function createData(
   vehicle: string,
   items: string,
   orderDate: string,
-  orderStatus: string,
+  orderStatus: string
 ) {
   return { from, to, vehicle, items, orderDate, orderStatus };
 }
 
 const rows = [
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
-  createData( 'Delhi', 'Banglore', 'Small', 'Item 23', '12:23:AM, 01-04-2023', 'Booked'),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
+  createData(
+    "Delhi",
+    "Banglore",
+    "Small",
+    "Item 23",
+    "12:23:AM, 01-04-2023",
+    "Booked"
+  ),
 ];
 
 export default function PreviousOrders() {
@@ -46,7 +94,7 @@ export default function PreviousOrders() {
           {rows.map((row) => (
             <TableRow
               key={row.from}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {row.from}
