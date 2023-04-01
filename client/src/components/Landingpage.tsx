@@ -34,6 +34,7 @@ export default function Album() {
       {/* <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
+
           </Typography>
         </Toolbar>
       </AppBar> */}
