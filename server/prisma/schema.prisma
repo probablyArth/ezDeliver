@@ -8,44 +8,47 @@ datasource db {
 }
 
 model User {
-  id String @default(uuid()) @id
-  phone String @unique
-  username String
+  id          String      @id @default(uuid())
+  phone       String      @unique
+  username    String
+  delieveries Delievery[]
 }
 
 model Delievery {
-  id String @default(uuid()) @id
+  id          String          @id @default(uuid())
   bookingDate DateTime
-  from String
-  to String
-  vehicleId String
-  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
-  items Item[]
-  status DelieveryStatus @default(BOOKED)
+  from        String
+  to          String
+  vehicleId   String?
+  vehicle     Vehicle?        @relation(fields: [vehicleId], references: [id])
+  sellerId    String
+  seller      User            @relation(fields: [sellerId], references: [id])
+  items       Item[]
+  status      DelieveryStatus @default(BOOKED)
 }
 
 enum DelieveryStatus {
   BOOKED
   SHIPPED
 }
+
 model Item {
-  id String @default(uuid()) @id
-  name String
-  quantity Int
-  weightPerKg Int
+  id          String    @id @default(uuid())
+  name        String
+  weight Int
   delieveryId String
-  delievery Delievery @relation(fields: [delieveryId], references: [id])
+  delievery   Delievery @relation(fields: [delieveryId], references: [id])
 }
 
 model Vehicle {
-  id String @default(uuid()) @id
-  name String
+  id          String      @id @default(uuid())
+  name        String
   weightLimit Int
-  pricePerKg Int
-  delieveries Delievery[]
+  pricePerKm  Int
+  Delievery   Delievery[]
 }
 
 model Token {
-  id String @default(uuid()) @id
+  id    String @id @default(uuid())
   token String @db.String(600)
 }
