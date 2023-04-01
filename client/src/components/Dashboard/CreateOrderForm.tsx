@@ -27,52 +27,64 @@ const items = [
 ];
 
 const CreateOrderForm = () => {
-  return (
-    <Box
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField id="outlined-error" label="From" defaultValue="" />
-        <TextField
-          id="outlined-error-helper-text"
-          label="To"
-          defaultValue=""
-          helperText=""
-        />
-      </div>
-      <div>
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Select Vehical"
-          defaultValue="EUR"
-          helperText=""
+    return (
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
         >
-          {vehicals.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Select Items"
-          defaultValue="EUR"
-          helperText=""
-        >
-          {items.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </div>
+          <div>
+            <TextField
+              
+              id="outlined-error"
+              label="From"
+              defaultValue=""
+            />
+            <TextField
+              
+              id="outlined-error-helper-text"
+              label="To"
+              defaultValue=""
+              helperText=""
+            />
+          </div>
+          <div>
+          
+          <TextField
+            id="outlined-select-currency"
+            label="Item Name"
+            defaultValue=""
+            helperText=""
+            / >
+
+            <TextField
+            id="outlined-select-currency"
+            label="Item Quantity (in kg)"
+            defaultValue=""
+            helperText=""
+            / >
+            
+          </div>
+
+          <div>
+          <TextField
+            id="outlined-select-currency"
+            select
+            label="Select Vehical"
+            defaultValue="EUR"
+            helperText=""
+            fullWidth={true}
+            >
+            {vehicals.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                {option.label}
+                </MenuItem>
+            ))}
+            </TextField>
+          </div>
 
       <div>
         <Button sx={{ m: 1 }} size="large" variant="contained">
