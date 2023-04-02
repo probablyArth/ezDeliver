@@ -12,6 +12,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { sendOtp, signin } from "../api/functions";
 import { setAccessToken, setRefreshToken } from "../storage/io";
 
+import { useNavigate } from "react-router-dom";
+
 const theme = createTheme();
 
 export default function Signup() {
@@ -68,6 +70,8 @@ export default function Signup() {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleSignIn = async () => {
     if(validateOTP()) {
       try {
@@ -75,7 +79,7 @@ export default function Signup() {
         if (res.message === "success") {
           setAccessToken(res.accessToken);
           setRefreshToken(res.refreshToken);
-          location.href = "/dashboard";
+          navigate("/dashboard")
         }
       } catch (error) {
         console.log(error);
