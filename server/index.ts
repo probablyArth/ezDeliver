@@ -8,8 +8,8 @@ import { PrismaClient } from "@prisma/client";
 import ApiRouter from "./router";
 
 export const prisma = new PrismaClient();
-
 config({ path: "./.env" });
+console.log(process.env)
 
 const seedVehicles = async () => {
   const vehicles = await prisma.vehicle.count({

@@ -66,7 +66,7 @@ export default function Album() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Sign Up</Button>
+              <Button href='/signup' variant="contained">Sign Up</Button>
               <Button variant="contained">About Us</Button>
               <Button variant="contained">Contact Us</Button>
             </Stack>

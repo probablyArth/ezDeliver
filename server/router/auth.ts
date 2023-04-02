@@ -41,7 +41,7 @@ AuthRouter.post(
             return prisma.user
               .create({
                 data: {
-                  phone: parsePhoneNumber(phone).number,
+                  phone: parsePhoneNumber(phone, "IN").number,
                   username,
                 },
               })
@@ -58,7 +58,9 @@ AuthRouter.post(
               });
           }
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e);
+          
           res.status(403).json({ message: "Invalid otp" });
         });
     } catch (e: any) {
