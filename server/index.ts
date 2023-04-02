@@ -77,7 +77,7 @@ const seedOnce = async () => {
       id: true,
     },
   });
-  await prisma.delievery.create({
+  await prisma.delivery.create({
     data: {
       sellerId: user.id,
       bookingDate: new Date(),

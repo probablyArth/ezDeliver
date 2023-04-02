@@ -11,11 +11,11 @@ model User {
   id          String      @id @default(uuid())
   phone       String      @unique
   username    String
-  delieveries Delievery[]
+  deliveries Delivery[]
   tokens      Token[]
 }
 
-model Delievery {
+model Delivery {
   id          String          @id @default(uuid())
   bookingDate DateTime
   distance    Int
@@ -26,10 +26,10 @@ model Delievery {
   sellerId    String
   seller      User            @relation(fields: [sellerId], references: [id], onDelete: Cascade)
   items       Item[]
-  status      DelieveryStatus @default(BOOKED)
+  status      DeliveryStatus @default(BOOKED)
 }
 
-enum DelieveryStatus {
+enum DeliveryStatus {
   BOOKED
   SHIPPED
 }
@@ -39,7 +39,7 @@ model Item {
   name        String
   weight      Int
   delieveryId String
-  delievery   Delievery @relation(fields: [delieveryId], references: [id], onDelete: Cascade)
+  delivery   Delivery @relation(fields: [delieveryId], references: [id], onDelete: Cascade)
 }
 
 model Vehicle {
@@ -47,7 +47,7 @@ model Vehicle {
   name        String
   weightLimit Int
   pricePerKm  Int
-  Delievery   Delievery[]
+  Delivery   Delivery[]
 }
 
 model Token {
