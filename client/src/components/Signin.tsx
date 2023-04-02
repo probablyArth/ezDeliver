@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { sendOtp,signup } from "../api/functions";
+import { sendOtp,signin } from "../api/functions";
 import { useQuery } from "@tanstack/react-query";
 import { setAccessToken, setRefreshToken } from "../storage/io";
 import { redirect } from "react-router-dom";
@@ -23,15 +23,15 @@ const theme = createTheme();
 export default function Signup() {
   const [isOTP, setIsOTP] = React.useState(true);
   const [isSendOTP, setIsSendOTP] = React.useState(true);
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
+//   const [firstName, setFirstName] = React.useState('');
+//   const [lastName, setLastName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [otp, setOtp] = React.useState('');
   
 
   const handleSendOtp = async (event: React.FormEvent<HTMLFormElement>) => {
     const res = await sendOtp(phone)
-    console.log({firstName, lastName, phone});
+    console.log({phone});
     if(res.message === "otp sent!") {
       setIsOTP(false);
       setIsSendOTP(false);
@@ -44,11 +44,15 @@ export default function Signup() {
   }
 
   const handleSignUp = async () => {
-    const res = await signup(firstName, lastName, phone, otp);
-    if(res.message === "User created") {
-      setAccessToken(res.accessToken);
-      setRefreshToken(res.refreshToken);
-      location.href = "/dashboard";
+    try {
+        const res = await signin( phone, otp);
+        if(res.message === "success") {
+          setAccessToken(res.accessToken);
+          setRefreshToken(res.refreshToken);
+          location.href = "/dashboard";
+        }
+    } catch (error) {
+        console.log(error);
     }
     
   }
@@ -76,7 +80,7 @@ export default function Signup() {
           >
            
             <Typography component="h1" variant="h5">
-              Create A New Account
+              Sign in to your Account
             </Typography>
             <Box
               component="form"
@@ -84,29 +88,7 @@ export default function Signup() {
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                    onChange={(e) => { setFirstName(e.target.value) }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
-                    onChange={(e) => { setLastName(e.target.value) }}
-                  />
-                </Grid>
+                
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -167,7 +149,7 @@ export default function Signup() {
                 },
               }}
             >
-              Sign up
+              Sign in
             </Button>
               }
 
