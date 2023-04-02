@@ -12,14 +12,13 @@ model User {
   phone       String      @unique
   username    String
   delieveries Delievery[]
-  tokens Token[]
+  tokens      Token[]
 }
 
 model Delievery {
   id          String          @id @default(uuid())
   bookingDate DateTime
-  from        String
-  to          String
+  distance    Int
   vehicleId   String?
   vehicle     Vehicle?        @relation(fields: [vehicleId], references: [id])
   sellerId    String
@@ -36,7 +35,7 @@ enum DelieveryStatus {
 model Item {
   id          String    @id @default(uuid())
   name        String
-  weight Int
+  weight      Int
   delieveryId String
   delievery   Delievery @relation(fields: [delieveryId], references: [id], onDelete: Cascade)
 }
@@ -50,8 +49,8 @@ model Vehicle {
 }
 
 model Token {
-  id    String @id @default(uuid())
-  token String @db.String(600)
+  id     String @id @default(uuid())
+  token  String @db.String(600)
   userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
