@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import Checkbox from "@mui/material/Checkbox";  
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import backgroundImg from 'client/src/assets/images/farm.jpeg';
+
 
 import { sendOtp,signup } from "../api/functions";
 import { useQuery } from "@tanstack/react-query";
@@ -58,11 +60,16 @@ export default function Signup() {
       <Container component="main" maxWidth="xs" style={{ marginTop: '100px' }}>
         <CssBaseline />
         <Box
-          sx={{
-            marginTop: 2,
+        sx={{
+            marginTop: 6,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            border: "1px solid rgba(0, 0, 0, 0.2)",
+            borderRadius: 2,
+            
           }}
         >
           <Box
@@ -70,12 +77,12 @@ export default function Signup() {
               width: "100%",
               p: 3,
               mt: 0,
-              border: "1px solid #ccc",
-              borderRadius: 4,
+              border: "2px solid #ccc",
+              borderRadius: 2,
             }}
           >
            
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" textAlign="center">
               Create A New Account
             </Typography>
             <Box
@@ -148,11 +155,12 @@ export default function Signup() {
                 sx={{
                   mb: 2,
                   backgroundColor: "",
-                  "&:hover": {
-                    backgroundColor: "darkGreen",
-                  },
+                  // "&:hover": {
+                  //   backgroundColor: "darkGreen",
+                  // },
+                  alignItems: "center"
                 }}
-              >
+                >
                 Send OTP
               </Button> :
               <Button
@@ -173,6 +181,7 @@ export default function Signup() {
 
               <Grid container justifyContent="flex-end">
                 <Grid item>
+                  <Link href="/login" variant="body2">
                   <Link href="/login" variant="body2">
                     Already have an account? Log in
                   </Link>
