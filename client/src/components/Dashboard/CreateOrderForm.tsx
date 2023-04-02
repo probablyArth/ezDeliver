@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import { getVehicle, createOrder } from "../../api/functions";
 import axiosInstance from "../../api/axiosClient";
 import { useState, useEffect } from 'react';
-import Alert from '@mui/material/Alert';
 
 const CreateOrderForm = () => {
 
@@ -98,6 +97,7 @@ const CreateOrderForm = () => {
       setitemQuantity(0);
       setvehicle("");
       setdistance(0);
+
     }
   }
 
@@ -123,13 +123,16 @@ const CreateOrderForm = () => {
           error={fromError}
           helperText={fromHelper}
           onFocus={()=> { setfromError(false); setfromHelper("") }}
+
           value={from}
+
           label="From" 
           defaultValue="" 
           />
         <TextField
           id="outlined-error-helper-text"
           onChange={(e)=> { setto(e.target.value) }}
+
           value={to}
           error={toError}
           helperText={toHelper}
@@ -143,6 +146,7 @@ const CreateOrderForm = () => {
           id="outlined-select-currency"
           onChange={(e)=> { setitemName(e.target.value) }}
           error={itemNameError}
+
           value={itemName}
           helperText={itemNameHelper}
           onFocus={()=> { setitemNameError(false); setitemNameHelper("") }}
