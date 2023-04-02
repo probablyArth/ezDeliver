@@ -90,7 +90,14 @@ const CreateOrderForm = () => {
     if(validateForm()){
       const res = await createOrder(from, to, itemName, itemQuantity, vehicle, distance);
       console.log(res);
-      
+      alert("Order created successfully!")
+      setfrom("");
+      setto("");
+      setitemName("");
+      setitemQuantity(0);
+      setvehicle("");
+      setdistance(0);
+
     }
   }
 
@@ -116,12 +123,17 @@ const CreateOrderForm = () => {
           error={fromError}
           helperText={fromHelper}
           onFocus={()=> { setfromError(false); setfromHelper("") }}
+
+          value={from}
+
           label="From" 
           defaultValue="" 
           />
         <TextField
           id="outlined-error-helper-text"
           onChange={(e)=> { setto(e.target.value) }}
+
+          value={to}
           error={toError}
           helperText={toHelper}
           onFocus={()=> { settoError(false); settoHelper("") }}
@@ -134,6 +146,8 @@ const CreateOrderForm = () => {
           id="outlined-select-currency"
           onChange={(e)=> { setitemName(e.target.value) }}
           error={itemNameError}
+
+          value={itemName}
           helperText={itemNameHelper}
           onFocus={()=> { setitemNameError(false); setitemNameHelper("") }}
           label="Item Name"
@@ -144,6 +158,7 @@ const CreateOrderForm = () => {
           id="outlined-select-currency"
           onChange={(e)=> { setitemQuantity(parseInt(e.target.value)) }}
           error={itemQuantityError}
+          value={itemQuantity}
           helperText={itemQuantityHelper}
           onFocus={()=> { setitemQuantityError(false); setitemQuantityHelper("") }}
           label="Item Quantity (in kg)"
@@ -174,6 +189,7 @@ const CreateOrderForm = () => {
           id="outlined-select-currency"
           onChange={(e)=> { setdistance(parseInt(e.target.value)) }}
           error={distanceError}
+          value={distance}
           helperText={distanceHelper}
           onFocus={()=> { setdistanceError(false); setdistanceHelper("") }}
           label="Approximate Distance"

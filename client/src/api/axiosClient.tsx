@@ -45,9 +45,9 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function (error) {
-    const originalRequest = error.config;
-
-    if (error.response.cause === "access_token") {
+    const originalRequest = error.config;    
+    if (error.response.data.cause === "access_token") {
+     
       const refreshToken = getRefreshToken();
       if (refreshToken) {
         return axiosInstance
