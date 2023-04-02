@@ -9,7 +9,7 @@ import ApiRouter from "./router";
 
 export const prisma = new PrismaClient();
 config({ path: "./.env" });
-console.log(process.env)
+console.log(process.env);
 
 const seedVehicles = async () => {
   const vehicles = await prisma.vehicle.count({
@@ -83,6 +83,7 @@ const seedOnce = async () => {
       bookingDate: new Date(),
       from: "191919",
       to: "202020",
+      distance: 20,
       items: {
         createMany: {
           data: [
