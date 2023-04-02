@@ -3,11 +3,11 @@ import { prisma } from "..";
 import { validateRequest } from "zod-express-middleware";
 import { z } from "zod";
 
-const DelieveryRouter = Router();
+const DeliveryRouter = Router();
 
-DelieveryRouter.get("/", async (req, res) => {
+DeliveryRouter.get("/", async (req, res) => {
   try {
-    const deliveries = await prisma.delievery.findMany({
+    const deliveries = await prisma.delivery.findMany({
       where: {
         sellerId: req.user.id,
       },
@@ -18,7 +18,7 @@ DelieveryRouter.get("/", async (req, res) => {
   }
 });
 
-DelieveryRouter.post(
+DeliveryRouter.post(
   "/",
   validateRequest({
     body: z.object({
@@ -41,7 +41,7 @@ DelieveryRouter.post(
     try {
       const { bookingDate, distance, items, vehicleId, from, to } = req.body;
 
-      const delievery = await prisma.delievery.create({
+      const delivery = await prisma.delivery.create({
         data: {
           bookingDate,
           distance,
@@ -56,11 +56,11 @@ DelieveryRouter.post(
           to,
         },
       });
-      return res.status(201).json({ delievery });
+      return res.status(201).json({ delivery });
     } catch (e: any) {
       return res.sendStatus(500);
     }
   }
 );
 
-export default DelieveryRouter;
+export default DeliveryRouter;
