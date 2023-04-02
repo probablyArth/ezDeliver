@@ -1,40 +1,30 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";  
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import backgroundImg from 'client/src/assets/images/farm.jpeg';
-
-
-import { sendOtp,signup } from "../api/functions";
-import { useQuery } from "@tanstack/react-query";
+import { sendOtp, signup } from "../api/functions";
 import { setAccessToken, setRefreshToken } from "../storage/io";
-import { redirect } from "react-router-dom";
+import { FormEvent, useState } from "react";
 
 const theme = createTheme();
 
 export default function Signup() {
-  const [isOTP, setIsOTP] = React.useState(true);
-  const [isSendOTP, setIsSendOTP] = React.useState(true);
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
-  const [phone, setPhone] = React.useState('');
-  const [otp, setOtp] = React.useState('');
-  
+  const [isOTP, setIsOTP] = useState(true);
+  const [isSendOTP, setIsSendOTP] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
 
-  const handleSendOtp = async (event: React.FormEvent<HTMLFormElement>) => {
-    const res = await sendOtp(phone)
-    console.log({firstName, lastName, phone});
-    if(res.message === "otp sent!") {
+  const handleSendOtp = async (event: FormEvent<HTMLFormElement>) => {
+    const res = await sendOtp(phone);
+    console.log({ firstName, lastName, phone });
+    if (res.message === "otp sent!") {
       setIsOTP(false);
       setIsSendOTP(false);
     }
@@ -42,25 +32,24 @@ export default function Signup() {
 
   const handleResendOtp = async () => {
     const res = await sendOtp(phone);
-    alert(res.message);;
-  }
+    alert(res.message);
+  };
 
   const handleSignUp = async () => {
     const res = await signup(firstName, lastName, phone, otp);
-    if(res.message === "User created") {
+    if (res.message === "User created") {
       setAccessToken(res.accessToken);
       setRefreshToken(res.refreshToken);
       location.href = "/dashboard";
     }
-    
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" style={{ marginTop: '100px' }}>
+      <Container component="main" maxWidth="xs" style={{ marginTop: "100px" }}>
         <CssBaseline />
         <Box
-        sx={{
+          sx={{
             marginTop: 6,
             display: "flex",
             flexDirection: "column",
@@ -69,7 +58,6 @@ export default function Signup() {
             backgroundPosition: "center",
             border: "1px solid rgba(0, 0, 0, 0.2)",
             borderRadius: 2,
-            
           }}
         >
           <Box
@@ -81,15 +69,10 @@ export default function Signup() {
               borderRadius: 2,
             }}
           >
-           
             <Typography component="h1" variant="h5" textAlign="center">
               Create A New Account
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              sx={{ mt: 3 }}
-            >
+            <Box component="form" noValidate sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -100,7 +83,9 @@ export default function Signup() {
                     id="firstName"
                     label="First Name"
                     autoFocus
-                    onChange={(e) => { setFirstName(e.target.value) }}
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -111,7 +96,9 @@ export default function Signup() {
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
-                    onChange={(e) => { setLastName(e.target.value) }}
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -121,63 +108,66 @@ export default function Signup() {
                     id="phoneno"
                     label="Phone Number"
                     name="phoneno"
-                    onChange={(e) => { setPhone(e.target.value) }}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    disabled = {isOTP}
+                    disabled={isOTP}
                     required
                     fullWidth
                     name="otp"
                     label="OTP "
                     id="otp"
-                    onChange={(e) => { setOtp(e.target.value) }}
+                    onChange={(e) => {
+                      setOtp(e.target.value);
+                    }}
                   />
                 </Grid>
-               
+
                 <Grid container justifyContent="flex-end">
-                <Grid  xs={12} sm={4} item>
-                  <Link onClick={handleResendOtp} variant="body2">
-                  Resend OTP
-                  </Link>
+                  <Grid xs={12} sm={4} item>
+                    <Link onClick={handleResendOtp} variant="body2">
+                      Resend OTP
+                    </Link>
+                  </Grid>
                 </Grid>
               </Grid>
-
-              
-              </Grid>
-              {
-                isSendOTP ?
+              {isSendOTP ? (
+                //@ts-ignore
                 <Button
-                onClick={handleSendOtp}
-                // type="submit"
-                variant="contained"
-                sx={{
-                  mb: 2,
-                  backgroundColor: "",
-                  // "&:hover": {
-                  //   backgroundColor: "darkGreen",
-                  // },
-                  alignItems: "center"
-                }}
+                  onClick={handleSendOtp}
+                  // type="submit"
+                  variant="contained"
+                  sx={{
+                    mb: 2,
+                    backgroundColor: "",
+                    // "&:hover": {
+                    //   backgroundColor: "darkGreen",
+                    // },
+                    alignItems: "center",
+                  }}
                 >
-                Send OTP
-              </Button> :
-              <Button
-              onClick={handleSignUp}
-              // type="submit"
-              variant="contained"
-              sx={{
-                mb: 2,
-                backgroundColor: "",
-                "&:hover": {
-                  backgroundColor: "darkGreen",
-                },
-              }}
-            >
-              Sign up
-            </Button>
-              }
+                  Send OTP
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleSignUp}
+                  // type="submit"
+                  variant="contained"
+                  sx={{
+                    mb: 2,
+                    backgroundColor: "",
+                    "&:hover": {
+                      backgroundColor: "darkGreen",
+                    },
+                  }}
+                >
+                  Sign up
+                </Button>
+              )}
 
               <Grid container justifyContent="flex-end">
                 <Grid item>
@@ -189,7 +179,6 @@ export default function Signup() {
             </Box>
           </Box>
         </Box>
-        
       </Container>
     </ThemeProvider>
   );

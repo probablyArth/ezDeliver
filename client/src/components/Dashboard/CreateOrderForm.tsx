@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -27,68 +26,64 @@ const items = [
 ];
 
 const CreateOrderForm = () => {
-    return (
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-          style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}
+  return (
+    <Box
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
+      }}
+      noValidate
+      autoComplete="off"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div>
+        <TextField id="outlined-error" label="From" defaultValue="" />
+        <TextField
+          id="outlined-error-helper-text"
+          label="To"
+          defaultValue=""
+          helperText=""
+        />
+      </div>
+      <div>
+        <TextField
+          id="outlined-select-currency"
+          label="Item Name"
+          defaultValue=""
+          helperText=""
+        />
+
+        <TextField
+          id="outlined-select-currency"
+          label="Item Quantity (in kg)"
+          defaultValue=""
+          helperText=""
+        />
+      </div>
+
+      <div style={{ width: "100%" }}>
+        <TextField
+          id="outlined-select-currency"
+          select
+          label="Select Vehical"
+          defaultValue="EUR"
+          helperText=""
+          fullWidth={true}
         >
-          <div>
-            <TextField
-              
-              id="outlined-error"
-              label="From"
-              defaultValue=""
-            />
-            <TextField
-              
-              id="outlined-error-helper-text"
-              label="To"
-              defaultValue=""
-              helperText=""
-            />
-          </div>
-          <div>
-          
-          <TextField
-            id="outlined-select-currency"
-            label="Item Name"
-            defaultValue=""
-            helperText=""
-            / >
+          {vehicals.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </div>
 
-            <TextField
-            id="outlined-select-currency"
-            label="Item Quantity (in kg)"
-            defaultValue=""
-            helperText=""
-            / >
-            
-          </div>
-
-          <div style={{  width: '100%'}}>
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Select Vehical"
-            defaultValue="EUR"
-            helperText=""
-            fullWidth={true}
-            >
-            {vehicals.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                {option.label}
-                </MenuItem>
-            ))}
-            </TextField>
-
-          </div>
-
-      <div style={{  width: '100%'}}>
+      <div style={{ width: "100%" }}>
         <Button sx={{ m: 1 }} size="large" variant="contained">
           Submit
         </Button>
