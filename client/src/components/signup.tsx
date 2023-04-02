@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { sendOtp, signup } from "../api/functions";
 import { setAccessToken, setRefreshToken } from "../storage/io";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef } from "react";
 
 const theme = createTheme();
 
@@ -20,27 +20,80 @@ export default function Signup() {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
+  const [otpError, setotpError] = useState(false);
+  const [otpHelper, setotpHelper] = useState("");
+
+  const [firstNameError, setfirstNameError] = useState(false);
+  const [firstNameHelper, setfirstNameHelper] = useState("");
+
+  const [lastNameError, setlastNameError] = useState(false);
+  const [lastNameHelper, setlastNameHelper] = useState("");
+
+  const [phoneError, setphoneError] = useState(false);
+  const [phoneHelper, setphoneHelper] = useState("");
+
+  
+  const validateForm = () : boolean => {
+    var bool: boolean = true;
+    if(firstName.length < 3) {
+      setfirstNameError(true);
+      setfirstNameHelper("Atleast 3 characters")
+      bool =  false;
+    }
+
+    if(lastName.length < 3) {
+      setlastNameError(true);
+      setlastNameHelper("Atleast 3 characters");
+      bool =  false;
+    }
+    
+    if(phone.length != 10) {
+      setphoneError(true);
+      setphoneHelper("Must be 10 digit");
+      bool = false;
+    }
+
+    return bool;
+  }
+
+  const validateOTP = () : boolean => {
+    if(otp.length !== 6) {
+      setotpError(true);
+      setotpHelper("OTP must be 6 digit")
+      return false;
+    }
+    return true;
+  }
+
+
+
 
   const handleSendOtp = async (event: FormEvent<HTMLFormElement>) => {
-    const res = await sendOtp(phone);
-    console.log({ firstName, lastName, phone });
-    if (res.message === "otp sent!") {
-      setIsOTP(false);
-      setIsSendOTP(false);
+    if(validateForm()) {
+      const res = await sendOtp(phone);
+      console.log({ firstName, lastName, phone });
+      if (res.message === "otp sent!") {
+        setIsOTP(false);
+        setIsSendOTP(false);
+      }
     }
   };
 
   const handleResendOtp = async () => {
-    const res = await sendOtp(phone);
-    alert(res.message);
+    if(validateForm()) {
+      const res = await sendOtp(phone);
+      alert(res.message);
+    }
   };
 
   const handleSignUp = async () => {
-    const res = await signup(firstName, lastName, phone, otp);
-    if (res.message === "User created") {
-      setAccessToken(res.accessToken);
-      setRefreshToken(res.refreshToken);
-      location.href = "/dashboard";
+    if(validateOTP()) {
+      const res = await signup(firstName, lastName, phone, otp);
+      if (res.message === "User created") {
+        setAccessToken(res.accessToken);
+        setRefreshToken(res.refreshToken);
+        location.href = "/dashboard";
+      }
     }
   };
 
@@ -76,8 +129,12 @@ export default function Signup() {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    
                     autoComplete="given-name"
                     name="firstName"
+                    error={firstNameError}
+                    helperText={firstNameHelper}
+                    onFocus={ ()=> {setfirstNameError(false); setfirstNameHelper(""); } }
                     required
                     fullWidth
                     id="firstName"
@@ -92,6 +149,9 @@ export default function Signup() {
                   <TextField
                     required
                     fullWidth
+                    error={lastNameError}
+                    helperText={lastNameHelper}
+                    onFocus={ ()=> {setlastNameError(false); setlastNameHelper(""); } }
                     id="lastName"
                     label="Last Name"
                     name="lastName"
@@ -105,6 +165,9 @@ export default function Signup() {
                   <TextField
                     required
                     fullWidth
+                    error={phoneError}
+                    helperText={phoneHelper}
+                    onFocus={ ()=> {setphoneError(false); setphoneHelper(""); } }
                     id="phoneno"
                     label="Phone Number"
                     name="phoneno"
@@ -115,7 +178,10 @@ export default function Signup() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={otpError}
+                    helperText={otpHelper}
                     disabled={isOTP}
+                    onFocus={ ()=> {setotpError(false); setotpHelper(""); } }
                     required
                     fullWidth
                     name="otp"
@@ -127,12 +193,12 @@ export default function Signup() {
                   />
                 </Grid>
 
-                <Grid container justifyContent="flex-end">
-                  <Grid xs={12} sm={4} item>
+                <Grid sx={ { m:2 } } container justifyContent="flex-end">
+                  
                     <Link onClick={handleResendOtp} variant="body2">
                       Resend OTP
                     </Link>
-                  </Grid>
+                  
                 </Grid>
               </Grid>
               {isSendOTP ? (

@@ -15,6 +15,7 @@ const AuthMiddleware: Handler = async (req, res, next) => {
   try {
     userId = (await verifyJWT(accessToken)).id;
   } catch (e) {
+    console.log(e)
     return res
       .status(401)
       .json({ message: "Invalid accessToken", cause: "access_token" });

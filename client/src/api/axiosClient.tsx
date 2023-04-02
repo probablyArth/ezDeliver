@@ -42,11 +42,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   function (response) {
     // do sth with response
+    return response;
   },
   function (error) {
     const originalRequest = error.config;
 
-    if (error.response.cause === "token") {
+    if (error.response.cause === "access_token") {
       const refreshToken = getRefreshToken();
       if (refreshToken) {
         return axiosInstance
@@ -73,3 +74,5 @@ axiosInstance.interceptors.response.use(
     }
   }
 );
+
+export default axiosInstance;

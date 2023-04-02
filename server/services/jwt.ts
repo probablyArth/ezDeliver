@@ -3,7 +3,7 @@ import { prisma } from "..";
 
 export const createJWTtoken = (id: string) => {
   return sign({ id }, process.env.JWT_SIGNING_KEY, {
-    expiresIn: parseInt(process.env.JWT_EXPIRY, 10),
+    expiresIn: process.env.JWT_EXPIRY,
   });
 };
 

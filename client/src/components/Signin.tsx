@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FormEvent, useState, useRef } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -12,40 +12,78 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { sendOtp, signin } from "../api/functions";
 import { setAccessToken, setRefreshToken } from "../storage/io";
 
+import { useNavigate } from "react-router-dom";
+
 const theme = createTheme();
 
 export default function Signup() {
-  const [isOTP, setIsOTP] = React.useState(true);
-  const [isSendOTP, setIsSendOTP] = React.useState(true);
-  //   const [firstName, setFirstName] = React.useState('');
-  //   const [lastName, setLastName] = React.useState('');
-  const [phone, setPhone] = React.useState("");
-  const [otp, setOtp] = React.useState("");
+  const [isOTP, setIsOTP] = useState(true);
+  const [isSendOTP, setIsSendOTP] = useState(true);
+  //   const [firstName, setFirstName] = useState('');
+  //   const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+
+  const [otpError, setotpError] = useState(false);
+  const [otpHelper, setotpHelper] = useState("");
+
+  const [phoneError, setphoneError] = useState(false);
+  const [phoneHelper, setphoneHelper] = useState("");
+
+  const validateForm = () : boolean => {
+    var bool: boolean = true;
+    if(phone.length != 10) {
+      setphoneError(true);
+      setphoneHelper("Must be 10 digit");
+      bool = false;
+    }
+
+    return bool;
+  }
+
+  const validateOTP = () : boolean => {
+    if(otp.length !== 6) {
+      setotpError(true);
+      setotpHelper("OTP must be 6 digit")
+      return false;
+    }
+    return true;
+  }
 
   const handleSendOtp = async (event: React.FormEvent<HTMLFormElement>) => {
-    const res = await sendOtp(phone);
-    console.log({ phone });
-    if (res.message === "otp sent!") {
-      setIsOTP(false);
-      setIsSendOTP(false);
+    if(validateForm()) {
+      const res = await sendOtp(phone);
+      console.log({ phone });
+      if (res.message === "otp sent!") {
+        setIsOTP(false);
+        setIsSendOTP(false);
+      }
+      
     }
   };
 
   const handleResendOtp = async () => {
-    const res = await sendOtp(phone);
-    alert(res.message);
+    if(validateForm()) {
+      const res = await sendOtp(phone);
+      alert(res.message);
+
+    }
   };
 
-  const handleSignUp = async () => {
-    try {
-      const res = await signin(phone, otp);
-      if (res.message === "success") {
-        setAccessToken(res.accessToken);
-        setRefreshToken(res.refreshToken);
-        location.href = "/dashboard";
+  const navigate = useNavigate();
+
+  const handleSignIn = async () => {
+    if(validateOTP()) {
+      try {
+        const res = await signin(phone, otp);
+        if (res.message === "success") {
+          setAccessToken(res.accessToken);
+          setRefreshToken(res.refreshToken);
+          navigate("/dashboard")
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -79,6 +117,9 @@ export default function Signup() {
                   <TextField
                     required
                     fullWidth
+                    error={phoneError}
+                    helperText={phoneHelper}
+                    onFocus={ ()=> {setphoneError(false); setphoneHelper(""); } }
                     id="phoneno"
                     label="Phone Number"
                     name="phoneno"
@@ -89,7 +130,10 @@ export default function Signup() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={otpError}
+                    helperText={otpHelper}
                     disabled={isOTP}
+                    onFocus={ ()=> {setotpError(false); setotpHelper(""); } }
                     required
                     fullWidth
                     name="otp"
@@ -127,7 +171,7 @@ export default function Signup() {
                 </Button>
               ) : (
                 <Button
-                  onClick={handleSignUp}
+                  onClick={handleSignIn}
                   // type="submit"
                   variant="contained"
                   sx={{
@@ -142,12 +186,12 @@ export default function Signup() {
                 </Button>
               )}
 
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    Already have an account? Log in
+              <Grid sx={ { m:2 } } container justifyContent="flex-end">
+                
+                  <Link href="/signup" variant="body2">
+                    Don't have an account? Sign up
                   </Link>
-                </Grid>
+              
               </Grid>
             </Box>
           </Box>

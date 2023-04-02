@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { prisma } from "..";
 import { validateRequest } from "zod-express-middleware";
-import { z } from "zod";
+import { date, z } from "zod";
 
 const DeliveryRouter = Router();
 
@@ -39,11 +39,11 @@ DeliveryRouter.post(
   }),
   async (req, res) => {
     try {
-      const { bookingDate, distance, items, vehicleId, from, to } = req.body;
+      const { distance, items, vehicleId, from, to } = req.body;
 
       const delivery = await prisma.delivery.create({
         data: {
-          bookingDate,
+          bookingDate: new Date(),
           distance,
           sellerId: req.user.id,
           vehicleId,
