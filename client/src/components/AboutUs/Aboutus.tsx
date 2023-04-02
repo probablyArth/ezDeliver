@@ -4,6 +4,7 @@ import  {AiFillMail , AiFillPhone , AiFillGithub}  from "react-icons/ai";
 
 const AboutUs = () => {
   return (
+    <>
     <div className="about-us-container">
 
 
@@ -19,6 +20,7 @@ const AboutUs = () => {
           Our aim is to provide Fast and Easy delivery solutions along with keeping the middle-men away from the scene .
           </p>
         </section>
+        <br /><br />
         
         <section>
           <h2 className='Abouth2'>Our Team</h2>
@@ -30,18 +32,22 @@ const AboutUs = () => {
             <li>VAIBHAV - <a className='github' href="https://github.com/VaibhavKambar7" target='__blank'><AiFillGithub/></a></li>
           </ul>
         </section>
+        <br /><br />
 
         <section className='about-section'>
           <h2 className='Abouth2'>Contact Us</h2>
-          <p className='AboutP AboutP2'> <AiFillMail/> : <a className='AboutP2' href=" contact@ezDeliver.co" target='__blank'> contact@ezDeliver.co</a></p>
-          <p className='AboutP AboutP2'> <AiFillPhone/> : +91 77766 22233</p>
+          <div className='contact'>
+          <p className='AboutP '> <AiFillMail/> : <a className='github' href=" contact@ezDeliver.co" target='__blank'> contact@ezDeliver.co</a></p>
+          <p className='AboutP '> <AiFillPhone/> : +91 77766 22233</p>
+          </div>
         </section>
 
 
       </main>
       
-
     </div>
+
+    </>
   );
 };
 
