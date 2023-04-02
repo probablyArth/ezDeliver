@@ -4,6 +4,7 @@ import Signin from "./components/Signin";
 import Dashboard from "./components/dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Landingpage";
+import About from './components/AboutUs/About'
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [],
+  },
+  {
+    path: "/about",
+    element: <About />,
     children: [],
   },
 ]);
