@@ -3,9 +3,9 @@ import { prisma } from "..";
 
 const VehicleRouter = Router();
 
-VehicleRouter.get("/", (req, res) => {
+VehicleRouter.get("/", async (req, res) => {
   try {
-    const vehicles = prisma.vehicle.findMany();
+    const vehicles = await prisma.vehicle.findMany();
     return res.json({ vehicles });
   } catch (e: any) {
     console.log(e.message);
