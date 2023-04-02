@@ -4,7 +4,7 @@ import Signin from "./components/Signin";
 import Dashboard from "./components/dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Landingpage";
-import About from './components/AboutUs/About'
+import About from './components/AboutUs/Aboutus'
 
 import { QueryClient, QueryClientProvider } from "react-query";
 

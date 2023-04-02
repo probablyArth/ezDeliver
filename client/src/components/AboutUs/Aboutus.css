@@ -1,0 +1,63 @@
+/* Global styles */
+.about-us-container {
+    font-family: Arial, sans-serif;
+    margin: auto;
+    width: 60rem;
+    border-radius: 20px;
+    background-image: url('./aboutusBackground.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #BACDDB;
+  }
+  
+  /* Header styles */
+  .headAbout {
+    background-color: #00235B;
+    color: aliceblue;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+  
+  
+  
+ 
+  /* Main styles */
+  .mainComp {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .about-section {
+    margin-bottom: 2rem;
+  }
+  
+  .Abouth2{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .AboutP{
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  .AboutP2{
+    color: aliceblue;
+  }
+  
+  .AboutUl {
+    font-size: 1rem;
+    list-style: disc;
+    margin-left: 2rem;
+    line-height: 1.5;
+  }
+  .github{
+    color: #0B2447;
+  }
+  .github:hover{
+    color: coral;
+  }
+
+  
