@@ -13,7 +13,7 @@ export const signup = (firstname: String, lastname: String,  phone: String, otp:
         phone, username: firstname+'_'+lastname, otp
     })
     .then (data => data.data)
-    .catch (err => err)
+    .catch (err => {console.log(err); alert(err.response.data.message); location.href = '/login'})
 
 export const signin = (phone: String, otp: String) =>
     axios.post(BASE_URL+'/auth/login', {
