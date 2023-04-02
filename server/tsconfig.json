@@ -109,6 +109,5 @@
   },
   "ts-node": {
     "files": true
-  },
-  "files": ["./environment.d.ts"],
+  }
 }

@@ -7,5 +7,6 @@ const ApiRouter = Router();
 
 ApiRouter.use("/auth", AuthRouter);
 ApiRouter.use("/delievery", AuthMiddleware, DelieveryRouter);
+ApiRouter.use("/vehicle", AuthMiddleware, DelieveryRouter);
 
 export default ApiRouter;
