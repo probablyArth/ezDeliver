@@ -19,6 +19,8 @@ model Delievery {
   id          String          @id @default(uuid())
   bookingDate DateTime
   distance    Int
+  from String
+  to String
   vehicleId   String?
   vehicle     Vehicle?        @relation(fields: [vehicleId], references: [id])
   sellerId    String

@@ -33,11 +33,13 @@ DelieveryRouter.post(
       bookingDate: z.date(),
       items: z.array(z.object({ name: z.string(), weight: z.number() })),
       distance: z.number(),
+      from: z.string(),
+      to: z.string(),
     }),
   }),
   async (req, res) => {
     try {
-      const { bookingDate, distance, items, vehicleId } = req.body;
+      const { bookingDate, distance, items, vehicleId, from, to } = req.body;
 
       const delievery = await prisma.delievery.create({
         data: {
@@ -50,6 +52,8 @@ DelieveryRouter.post(
               data: items,
             },
           },
+          from,
+          to,
         },
       });
       return res.status(201).json({ delievery });
