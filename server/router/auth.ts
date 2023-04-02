@@ -41,7 +41,7 @@ AuthRouter.post(
             return prisma.user
               .create({
                 data: {
-                  phone: parsePhoneNumber(phone).number,
+                  phone: parsePhoneNumber(phone, "IN").number,
                   username,
                 },
               })
