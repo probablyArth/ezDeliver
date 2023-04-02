@@ -22,15 +22,7 @@ DeliveryRouter.post(
   "/",
   validateRequest({
     body: z.object({
-      vehicleId: z.string().refine(
-        async (vehicleId) =>
-          await prisma.vehicle.findUnique({
-            where: {
-              id: vehicleId,
-            },
-          })
-      ),
-      bookingDate: z.date(),
+      vehicleId: z.string(),
       items: z.array(z.object({ name: z.string(), weight: z.number() })),
       distance: z.number(),
       from: z.string(),
